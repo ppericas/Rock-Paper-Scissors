@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="base.css")}}">
+</head>
+<body>
+    <!--
+        Añadimos un menú superior para el blog en el que se muestre el nombre del usuario en caso de estar autenticado o un enlace para loguearse en caso contrario.
+    -->
+    <div>
+        <ul class="user-info">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            {% if current_user.is_anonymous %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li> | </li>
+                <li><a href="{{ url_for('show_signup_form') }}">Registrar</a></li>
+            {% else %}
+                <li>{{ current_user.name }}</li>
+                <li><a href="{{ url_for('show_post') }}">Posts</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

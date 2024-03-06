@@ -1,0 +1,13 @@
+{% extends "base_template.html" %}
+
+{% block title %}Tutorial Flask: Miniblog{% endblock %}
+
+{% block content %}
+    {% if num_posts == 0 %}
+        <p>No hay posts</p>
+    {% elif num_posts == 1 %}
+        <p>1 post</p>
+    {% else %}
+        <p>{{ num_posts }} posts</p>
+    {% endif %}
+{% endblock %}
