@@ -1,0 +1,26 @@
+Una vez que tengais el repositorio ya clonado en la carpeta donde vais a hacer el proyecto, tendreis que usar los siguientes comandos para hacer el trabajo y que se suba correctamente:
+He creado una rama para cada persona, a parte de la rama  <div>. Los nombres de las ramas son vuestros propios nombres: alvaro, arjona, jaime, nestor.
+Os recomiendo que os instaleis la extension de Visual Studio <GitLens> para poder trabajar mas comodamente.
+1. Cuando abrais la consola para ver las ramas que hay creadas vais a usar el siguiente comando:
+- git branch
+
+2. Para cambiar de rama es el siguiente comando:
+- git checkout <NOMBRE RAMA>
+3. Una vez en la rama deseada podreis hacer los cambios y cuando querais dejar de trabajar en el proyecto es muy importante que useis los siguientes comandos de uno en uno:
+- git add .
+- git commit -m "<MENSAJE RESUMEN CAMBIOS>"
+
+4. La primera vez que utiliceis el comando push teneis que usar el siguiente comando:
+- git push -u origin <RAMA ACTUAL>
+
+5. El resto de veces solo utilizareis:
+- git push
+
+
+IMPORTANTE: Para usar el comando merge teneis que haber hecho el paso 3 sino no se ejecutara el comando.
+IMPORTANTE: teneis que estar en la rama main para hacer un merge, si no lo estas, usa este comando para volver a ella: 
+- git checkout main
+
+6. Ahora vamos con los comandos para cuando querramos añadir la parte del codigo que hayamos hecho y que ya sea funcional:
+
+- git merge <NOMBRE DE TU RAMA>
