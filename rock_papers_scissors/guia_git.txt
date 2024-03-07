@@ -1,6 +1,7 @@
 Una vez que tengais el repositorio ya clonado en la carpeta donde vais a hacer el proyecto, tendreis que usar los siguientes comandos para hacer el trabajo y que se suba correctamente:
 He creado una rama para cada persona, a parte de la rama  <div>. Los nombres de las ramas son vuestros propios nombres: alvaro, arjona, jaime, nestor.
 Os recomiendo que os instaleis la extension de Visual Studio <GitLens> para poder trabajar mas comodamente.
+
 1. Cuando abrais la consola para ver las ramas que hay creadas vais a usar el siguiente comando:
 - git branch                                    ### Devuelve una lista de todas las ramas que hay en el repositorio.
 
