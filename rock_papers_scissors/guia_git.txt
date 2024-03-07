@@ -18,13 +18,21 @@ Os recomiendo que os instaleis la extension de Visual Studio <GitLens> para pode
 5. El resto de veces solo utilizareis:
 - git push                                      ### "Sube" los commits que has hecho localmente al repositorio remoto (Los sube a la nube)
 
-IMPORTANTE: Para usar el comando merge teneis que haber hecho el paso 3 sino no se ejecutara el comando.
+IMPORTANTE: Para usar el comando merge teneis que haber hecho el paso 3 (git add y commit) sino no se ejecutara el comando.
 IMPORTANTE: teneis que estar en la rama master para hacer un merge, si no lo estas, usa este comando para volver a ella: 
 - git checkout master                           ### Cambia de la rama en la que estabas a la rama que especificas (en este caso es master).
 
-6. Ahora vamos con los comandos para cuando querramos añadir la parte del codigo que hayamos hecho y que ya sea funcional:
+6. Ahora vamos con los comandos para cuando querramos añadir la parte del codigo que hayamos hecho y que ya sea funcional a la rama master:
 - git merge <NOMBRE DE TU RAMA>                 ### Merge == Unir. Une los cambios de la rama que especificas <NOMBRE DE TU RAMA> a la rama en la que estas (master)
 
 En caso de que os salga por la consola un mensage que ponga alco como merge conflict o merge error y se os subrallen linias en vustro codigo de color verde y azul pulsad el boton de arriba
 de la primera linia: "Accept both Changes". Esto lo que hara es que si hemos escrito dos personas sobre la misma linia de codigo acepta las dos linias y aunque no funcione de primeras si es una funcion
 o una parte importante del codigo nos ponemos en contacto y lo resolvemos.
+
+7. Despues de hacer merge, tendremos que seguir los pasos 4 o 5 (push) para que los cambios que has hecho en rama master de manera local se suban a la nube.
+
+8. Ahora vamos con los comandos para cuando alguien haya subido una parte del codigo a la rama master que queramos usar. Usaremos los mismos comandos que hemos visto hasta ahora.
+Primero nos aseguramos de estar en vuestra rama con el paso 2 (checkout). Ahora usamos merge de la siguiente manera:
+- git merge master
+
+Y asi ya tendriamos el codigo en nuestra rama actualizado.
