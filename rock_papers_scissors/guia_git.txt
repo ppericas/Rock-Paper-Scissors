@@ -22,5 +22,4 @@ IMPORTANTE: teneis que estar en la rama main para hacer un merge, si no lo estas
 - git checkout main
 
 6. Ahora vamos con los comandos para cuando querramos añadir la parte del codigo que hayamos hecho y que ya sea funcional:
-
 - git merge <NOMBRE DE TU RAMA>
