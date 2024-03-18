@@ -174,10 +174,6 @@ def load_user(nick):
     return User.query.filter_by(nick=nick).first()
 
 
-
-
-
-
 # Definimos este como el script principal
 if __name__ == '__main__':
     app.run(debug=True)
