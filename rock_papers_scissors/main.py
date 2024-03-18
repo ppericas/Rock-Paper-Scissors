@@ -19,11 +19,13 @@ from flask_login import LoginManager, login_user, logout_user, current_user, log
 from models import users, get_user, User
 from forms import LoginForm
 from urllib.parse import urlparse as url_parse
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://piedra:papel_tijeras@localhost/piedra_papel_tijeras'
+db = SQLAlchemy(app)
 
 """
 · Para gestionar el login debemos crear un objeto con LogginManager
@@ -66,31 +68,34 @@ Modificamos la vista para ir añadiendo a los usuarios registrados a la lista us
 # http://127.0.0.1:5000/signup/
 @app.route("/signup/", methods=["GET", "POST"])
 def show_signup_form():
-    # Si el usuario ya está autenticado, redirige a la página principal
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    # En caso contrario, carga, muestra y valida el formulario de registro
+    
     form = SignupForm()
-    # Validamos si el usuario ha presionado el botón de submit del formulario de login
+    
     if form.validate_on_submit():
-        # Obtenemos los datos que ha introducido en el formulario
         name = form.name.data
         email = form.email.data
         password = form.password.data
-        # Creamos el usuario y lo guardamos
-        user = User(len(users) + 1, name, email, password) # `len(users) + 1` genera el identificador único del nuevo usuario
-        users.append(user)
-        # Dejamos al usuario logueado
-        login_user(user, remember=True)    
-        # Redirección del usuario dependiendo si el registro es válido o no.
+        
+        # Crear un nuevo usuario y guardarlo en la base de datos
+        user = User(name=name, email=email)
+        user.set_password(password)  # Asumiendo que tienes un método set_password() en tu modelo User para cifrar la contraseña
+        db.session.add(user)
+        db.session.commit()
+        
+        # Iniciar sesión con el nuevo usuario
+        login_user(user, remember=True)
+        
+        # Redireccionar al usuario dependiendo de si hay una página siguiente o no
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            # Correcto, redireccionamos al usuario a index.
             next_page = url_for('index')
         else:
-            # Error, mantenemos al usuario en la página de inicio de creación de usuarios.
             next_page = url_for('signup')
         return redirect(next_page)
+    
+    return render_template('signup.html', form=form)
 
     # Si no se ha apretado submit renderizamos la plantilla y mostramos el formulario
     return render_template("signup_form.html", form=form)
