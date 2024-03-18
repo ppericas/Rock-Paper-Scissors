@@ -16,6 +16,11 @@ class User(UserMixin, db.Model):
     mail = db.Column(db.String(50))
     contraseña = db.Column(db.String(128))
 
+    def __init__(self, nick, mail, contraseña):
+        self.nick = nick
+        self.mail = mail
+        self.set_password(contraseña)
+
     def set_password(self, password):
         self.contraseña = generate_password_hash(password)
 
