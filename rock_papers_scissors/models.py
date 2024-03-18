@@ -12,16 +12,14 @@ db = SQLAlchemy()
 class User(UserMixin, db.Model):
     __tablename__ = 'usuarios'
 
-
+    nick = db.Column(db.String(30), primary_key=True)
+    mail = db.Column(db.String(50))
+    contraseña = db.Column(db.String(128))
 
     def __init__(self, nick, mail, contraseña):
-        nick = db.Column(db.String(30), primary_key=True)
-        mail = db.Column(db.String(50))
-        contraseña = db.Column(db.String(128))
         self.nick = nick
         self.mail = mail
         self.set_password(contraseña)
-        
 
     def set_password(self, password):
         self.contraseña_hash = generate_password_hash(password)
