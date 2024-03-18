@@ -97,9 +97,6 @@ def show_signup_form():
     
     return render_template('signup.html', form=form)
 
-    # Si no se ha apretado submit renderizamos la plantilla y mostramos el formulario
-    return render_template("signup_form.html", form=form)
-
 
 # Función para crear nuevas entradas del blog mediante un formulario.
 # http://127.0.0.1:5000/admin/post/
