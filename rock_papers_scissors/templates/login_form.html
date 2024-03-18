@@ -14,15 +14,15 @@
             
             <!-- Renderizamos los diferentes campos del formulariop basado en WTForms -->
             <div>
-                {{ form.email.label }}
-                {{ form.email }}<br>
+                {{ form.mail.label }}
+                {{ form.mail }}<br>
                 {% for error in form.mail.errors %}
                 <span style="color: red;">{{ error }}</span>
                 {% endfor %}
             </div>
             <div>
-                {{ form.password.label }}
-                {{ form.password }}<br>
+                {{ form.contraseña.label }}
+                {{ form.contraseña }}<br>
                 {% for error in form.contraseña.errors %}
                 <span style="color: red;">{{ error }}</span>
                 {% endfor %}
