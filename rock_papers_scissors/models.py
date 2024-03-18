@@ -1,37 +1,27 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash # Generar passwords seguras.
-
+from main import db
 
 """
 Esta clase representa a los usuarios de nuestra aplicación. Además, contiene toda la lógica para crear usuarios,
 guardar las contraseñas de modo seguro o verificar los passwords.
 """
 # Definición de la clase User que hereda de UserMixin proporcionado por Flask-Login
-class User(UserMixin):
+class User(UserMixin, db.Model):
+    __tablename__ = 'usuarios'
 
-    # Constructor de la clase User
-    def __init__(self, id, name, email, password, is_admin=False):
-        # Inicialización de las propiedades del usuario
-        self.id = id
-        self.name = name
-        self.email = email
-        # Almacena la contraseña como un hash seguro utilizando Werkzeug
-        self.password = generate_password_hash(password)
-        self.is_admin = is_admin
+    nick = db.Column(db.String(30), primary_key=True)
+    mail = db.Column(db.String(50))
+    contraseña = db.Column(db.String(128))
 
-    # Método para establecer la contraseña del usuario
     def set_password(self, password):
-        # Actualiza la contraseña almacenando su hash seguro
-        self.password = generate_password_hash(password)
+        self.contraseña = generate_password_hash(password)
 
-    # Método para verificar la contraseña proporcionada con la contraseña almacenada
     def check_password(self, password):
-        # Compara la contraseña proporcionada con el hash almacenado
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.contraseña, password)
 
-    # Método especial para representar el objeto User en formato legible
     def __repr__(self):
-        return '<User {}>'.format(self.email)
+        return '<User {}>'.format(self.nick)
 
     
 
