@@ -19,13 +19,13 @@ from flask_login import LoginManager, login_user, logout_user, current_user, log
 from models import users, get_user, User
 from forms import LoginForm
 from urllib.parse import urlparse as url_parse
-from flask_sqlalchemy import SQLAlchemy
+from models import db
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://piedra:papel_tijeras@localhost/piedra_papel_tijeras'
-db = SQLAlchemy(app)
+db.init_app(app)
 
 """
 · Para gestionar el login debemos crear un objeto con LogginManager

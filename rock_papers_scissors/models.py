@@ -1,11 +1,14 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash # Generar passwords seguras.
 from main import db
+from flask_sqlalchemy import SQLAlchemy
 
 """
 Esta clase representa a los usuarios de nuestra aplicación. Además, contiene toda la lógica para crear usuarios,
 guardar las contraseñas de modo seguro o verificar los passwords.
 """
+db = SQLAlchemy()
+
 # Definición de la clase User que hereda de UserMixin proporcionado por Flask-Login
 class User(UserMixin, db.Model):
     __tablename__ = 'usuarios'
