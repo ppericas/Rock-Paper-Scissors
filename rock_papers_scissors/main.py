@@ -75,12 +75,12 @@ def show_signup_form():
     
     if form.validate_on_submit():
         nick = form.name.data
-        email = form.email.data
-        password = form.password.data
+        mail = form.email.data
+        contraseña = form.password.data
         
         # Crear un nuevo usuario y guardarlo en la base de datos
-        user = User(nick, email, password)
-        user.set_password(password)  # Asumiendo que tienes un método set_password() en tu modelo User para cifrar la contraseña
+        user = User(nick, mail, contraseña)
+        user.set_password(contraseña)  # Asumiendo que tienes un método set_password() en tu modelo User para cifrar la contraseña
         db.session.add(user)
         db.session.commit()
         
