@@ -19,9 +19,9 @@ from wtforms import BooleanField
 # Definición de la clase para el formulario de registro
 class SignupForm(FlaskForm):
     # Campos del formulario con etiquetas y validadores
-    name = StringField('Nombre', validators=[DataRequired(), Length(max=64)])
-    password = PasswordField('Password', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    nick = StringField('Nombre', validators=[DataRequired(), Length(max=64)])
+    contraseña = PasswordField('Password', validators=[DataRequired()])
+    mail = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Registrar')  # Botón de envío del formulario
 
 # Definición de la clase para el formulario de publicación
@@ -34,7 +34,7 @@ class PostForm(FlaskForm):
 
 # Definición de la clase para el formulario de login
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    mail = StringField('Email', validators=[DataRequired()])
+    contraseña = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Recuérdame')
     submit = SubmitField('Login')
