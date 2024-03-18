@@ -17,7 +17,7 @@
                 <li> | </li>
                 <li><a href="{{ url_for('show_signup_form') }}">Registrar</a></li>
             {% else %}
-                <li>{{ current_user.name }}</li>
+                <li>{{ current_user.nick }}</li>
                 <li><a href="{{ url_for('show_post') }}">Posts</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}

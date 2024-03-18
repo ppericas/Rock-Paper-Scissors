@@ -79,7 +79,7 @@ def show_signup_form():
         contraseña = form.contraseña.data
         
         # Crear un nuevo usuario y guardarlo en la base de datos
-        user = User(nick, mail, contraseña)
+        user = User(nick=nick, mail=mail, contraseña=contraseña)
         user.set_password(contraseña)  # Asumiendo que tienes un método set_password() en tu modelo User para cifrar la contraseña
         db.session.add(user)
         db.session.commit()
@@ -131,35 +131,28 @@ def login():
     # Si el usuario ya está autenticado, redirige a la página principal
     if current_user.is_authenticated:
         return redirect(url_for('index'))
+    
     # En caso contrario, carga, muestra y valida el formulario de acceso
     form = LoginForm()
+    
     # Validamos si el usuario ha presionado el botón de submit del formulario de login
     if form.validate_on_submit():
-        # Comprobamos si la dirección de correo introducida está almacenada en nuestra lista de usuarios
-        user = get_user(form.email.data)
-        # Verificamos si el usuario existe (no es None) y si la contraseña coincide
-        if user is not None and user.check_password(form.password.data):
+        # Consultamos el usuario en la base de datos basándonos en el correo electrónico
+        user = User.query.filter_by(mail=form.mail.data).first()
+        
+        # Verificamos si el usuario existe y si la contraseña coincide
+        if user is not None and user.check_password(form.contraseña.data):
             # Inicia sesión con el usuario utilizando Flask-Login
             login_user(user, remember=form.remember_me.data)
-            # Redirección después de iniciar sesión según si la identificación es válida o fallida.
-            """
-            El parámetro "next" se utiliza en aplicaciones web para recordar la URL originalmente solicitada antes
-            de que un usuario sea redirigido a una página de inicio de sesión. Cuando un usuario no autenticado intenta
-            acceder a una página protegida, se agrega el parámetro "next" a la URL de redirección. Después de iniciar
-            sesión correctamente, la aplicación utiliza el valor de "next" para redirigir al usuario de vuelta a la página
-            originalmente solicitada, proporcionando una experiencia de usuario más fluida y devolviéndolo a la ubicación
-            deseada después de la autenticación.
-            """
+            
+            # Redirección después de iniciar sesión según si la identificación es válida o fallida
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
-                # Si las credenciales son correctas, redireccionamos al usuario a index.
                 next_page = url_for('index')
             else:
-                # Si las credenciales son incorrectas, mantenemos al usuario en la página de inicio de sesión.
                 next_page = url_for('login')
             return redirect(next_page)
-            
-    # Si el formulario no se ha enviado o la autenticación falló, renderiza el formulario de inicio de sesión
+    
     return render_template('login_form.html', form=form)
 
 # Función para que un usuario cierre sesión
@@ -177,11 +170,8 @@ Función esencial para que Flask-Login pueda gestionar y cargar usuarios en las 
 Para que funcione correctamente es conveniente situarla al final de nuestro código main.py.
 """
 @login_manager.user_loader
-def load_user(user_id):
-    for user in users:
-        if user.id == int(user_id):
-            return user
-    return None
+def load_user(nick):
+    return User.query.filter_by(nick=nick).first()
 
 
 

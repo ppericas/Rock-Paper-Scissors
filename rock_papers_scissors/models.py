@@ -25,10 +25,13 @@ class User(UserMixin, db.Model):
         self.contraseña = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.contraseña_hash, password)
+        return check_password_hash(self.contraseña, password)
 
     def __repr__(self):
         return '<User {}>'.format(self.nick)
+    
+    def get_id(self):
+        return self.nick
 
     
 
@@ -41,12 +44,6 @@ contienen elementos como mail o contraseña.
 """
 users = []
 # Función para obtener un usuario por su dirección de correo electrónico
-def get_user(email):
-    # Itera sobre cada usuario en la lista
-    for user in users:
-        # Verifica si la dirección de correo electrónico coincide
-        if user.email == email:
-            # Devuelve el usuario si se encuentra una coincidencia
-            return user
-    # Devuelve None si no se encuentra ningún usuario con el correo electrónico proporcionado
-    return None
+def get_user(mail):
+    # Consulta el usuario en la base de datos basándose en el correo electrónico
+    return User.query.filter_by(mail=mail).first()
