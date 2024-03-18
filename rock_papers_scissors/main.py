@@ -95,7 +95,7 @@ def show_signup_form():
             next_page = url_for('signup')
         return redirect(next_page)
     
-    return render_template('signup.html', form=form)
+    return render_template('signup_form.html', form=form)
 
 
 # Función para crear nuevas entradas del blog mediante un formulario.
