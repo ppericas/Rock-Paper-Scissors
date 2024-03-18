@@ -14,7 +14,7 @@ class User(UserMixin, db.Model):
 
     nick = db.Column(db.String(30), primary_key=True)
     mail = db.Column(db.String(50))
-    contraseña = db.Column(db.String(128))
+    contraseña_hash = db.Column(db.String(128))
 
     def __init__(self, nick, mail, contraseña):
         self.nick = nick
@@ -22,10 +22,10 @@ class User(UserMixin, db.Model):
         self.set_password(contraseña)
 
     def set_password(self, password):
-        self.contraseña = generate_password_hash(password)
+        self.contraseña_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.contraseña, password)
+        return check_password_hash(self.contraseña_hash, password)
 
     def __repr__(self):
         return '<User {}>'.format(self.nick)
