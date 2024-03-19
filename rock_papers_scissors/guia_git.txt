@@ -1,0 +1,38 @@
+Una vez que tengais el repositorio ya clonado en la carpeta donde vais a hacer el proyecto, tendreis que usar los siguientes comandos para hacer el trabajo y que se suba correctamente:
+He creado una rama para cada persona, a parte de la rama  <div>. Los nombres de las ramas son vuestros propios nombres: alvaro, arjona, jaime, nestor.
+Os recomiendo que os instaleis la extension de Visual Studio <GitLens> para poder trabajar mas comodamente.
+
+1. Cuando abrais la consola para ver las ramas que hay creadas vais a usar el siguiente comando:
+- git branch                                    ### Devuelve una lista de todas las ramas que hay en el repositorio.
+
+2. Para cambiar de rama es el siguiente comando:
+- git checkout <NOMBRE DE TU RAMA>              ### Cambia de la rama en la que estabas a la rama que especificas.
+
+3. Una vez en la rama deseada podreis hacer cambios. Cuando querais dejar de trabajar en el proyecto es muy importante que useis los siguientes comandos de uno en uno:
+- git add .                                     ### Agregar un directorio de trabajo completo al área de preparación.
+- git commit -m "<MENSAJE RESUMEN CAMBIOS>"     ### Añadir los cambios que has hecho a tu proyecto localmente. Este comando actuara únicamente en los cambios que han sido preparados utilizando git add.
+
+4. La primera vez que utiliceis el comando push teneis que usar el siguiente comando:
+- git push -u origin <RAMA ACTUAL>              ### "Sube" los commits que has hecho localmente al repositorio remoto (Los sube a la nube)
+
+5. El resto de veces solo utilizareis:
+- git push                                      ### "Sube" los commits que has hecho localmente al repositorio remoto (Los sube a la nube)
+
+IMPORTANTE: Para usar el comando merge teneis que haber hecho el paso 3 (git add y commit) sino no se ejecutara el comando.
+IMPORTANTE: teneis que estar en la rama master para hacer un merge, si no lo estas, usa este comando para volver a ella: 
+- git checkout master                           ### Cambia de la rama en la que estabas a la rama que especificas (en este caso es master).
+
+6. Ahora vamos con los comandos para cuando querramos añadir la parte del codigo que hayamos hecho y que ya sea funcional a la rama master:
+- git merge <NOMBRE DE TU RAMA>                 ### Merge == Unir. Une los cambios de la rama que especificas <NOMBRE DE TU RAMA> a la rama en la que estas (master)
+
+En caso de que os salga por la consola un mensage que ponga alco como merge conflict o merge error y se os subrallen linias en vustro codigo de color verde y azul pulsad el boton de arriba
+de la primera linia: "Accept both Changes". Esto lo que hara es que si hemos escrito dos personas sobre la misma linia de codigo acepta las dos linias y aunque no funcione de primeras si es una funcion
+o una parte importante del codigo nos ponemos en contacto y lo resolvemos.
+
+7. Despues de hacer merge, tendremos que seguir los pasos 4 o 5 (push) para que los cambios que has hecho en rama master de manera local se suban a la nube.
+
+8. Ahora vamos con los comandos para cuando alguien haya subido una parte del codigo a la rama master que queramos usar. Usaremos los mismos comandos que hemos visto hasta ahora.
+Primero nos aseguramos de estar en vuestra rama con el paso 2 (checkout). Ahora usamos merge de la siguiente manera:
+- git merge master
+
+Y asi ya tendriamos el codigo en nuestra rama actualizado.

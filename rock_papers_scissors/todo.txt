@@ -1,0 +1,1 @@
+control de errores para no poder insertar 
