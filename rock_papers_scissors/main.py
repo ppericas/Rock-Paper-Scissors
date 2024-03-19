@@ -19,6 +19,8 @@ from flask_login import LoginManager, login_user, logout_user, current_user, log
 from models import users, get_user, User
 from forms import LoginForm
 from urllib.parse import urlparse as url_parse
+from ppt import juego
+
 
 
 app = Flask(__name__)
@@ -27,7 +29,7 @@ app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b
 """
 · Para gestionar el login debemos crear un objeto con LogginManager
 · Redirigimos al usuario a la página de login cuando intenta acceder a vistas protegidas (vistas que solo pueden acceder usuarios
-  previamente registrados)
+previamente registrados)
 """
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
@@ -122,7 +124,29 @@ def post_form():
 # Función para que un usuario registrado se identifique.
 """
 Creamos una función para manejar la validación de los usuarios.
+
 """
+
+@app.route('/jugar', methods=['GET', 'POST'])
+def jugar():
+
+    mensaje = ""
+    if request.method == 'POST':
+        # Obtener el input del usuario del formulario
+        input_usuario = request.form['input_usuario']
+        # Llamar a la función juego con el input del usuario
+        resultado_juego = juego(int(input_usuario))
+        mensaje = resultado_juego
+
+    # Renderizar la plantilla HTML con el mensaje
+    return render_template('index.html', mensaje=mensaje)
+
+    
+
+
+
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # Si el usuario ya está autenticado, redirige a la página principal
