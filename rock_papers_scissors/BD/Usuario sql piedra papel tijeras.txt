@@ -1,0 +1,2 @@
+Usuario: piedra
+contraseña: papel_tijeras
