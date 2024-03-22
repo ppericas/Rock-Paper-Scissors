@@ -37,13 +37,6 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 
-# Lista de diccionarios donde almacenamos los posts del blog
-posts = [
-    {"title": "Primer Post", "slug": "primer-post", "content": "Contenido del primer post."},
-    # {"title": "Segundo Post", "slug": "segundo-post", "content": "Contenido del segundo post."},
-    # Puedes agregar más posts aquí
-]
-
 
 
 ###########################################################
@@ -53,13 +46,7 @@ posts = [
 # Función principal para trabajar el index.
 @app.route("/")
 def index():
-    return render_template("index.html", num_posts=len(posts))
-
-
-# Función donde mostramos todos los posts del blog.
-@app.route('/show_post/')
-def show_post():
-    return render_template('post_view.html', posts=posts)
+    return render_template("index.html")
 
 
 # Función para la gestión del formulario de registro al blog
