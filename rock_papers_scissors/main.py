@@ -20,6 +20,7 @@ from models import users, get_user, User
 from forms import LoginForm
 from urllib.parse import urlparse as url_parse
 from models import db
+from ppt import juego
 
 
 app = Flask(__name__)
@@ -120,7 +121,24 @@ def post_form():
     
     # Si no lo presiona (al inicializar) simplemente pasamos al html el formulario de trabajo para poder trabajar con él.
     return render_template("admin/post_form.html", form=form)
-    
+
+ 
+@app.route('/jugar', methods=['GET', 'POST'])
+def jugar():
+
+    mensaje = ""
+    if request.method == 'POST':
+        # Obtener el input del usuario del formulario
+        input_usuario = request.form['input_usuario']
+        # Llamar a la función juego con el input del usuario
+        resultado_juego = juego(int(input_usuario))
+        mensaje = resultado_juego
+
+    # Renderizar la plantilla HTML con el mensaje
+    return render_template('index.html', mensaje=mensaje)
+
+
+
 
 # Función para que un usuario registrado se identifique.
 """
