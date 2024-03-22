@@ -99,28 +99,7 @@ def show_signup_form():
     return render_template('signup_form.html', form=form)
 
 
-# Función para crear nuevas entradas del blog mediante un formulario.
-# http://127.0.0.1:5000/admin/post/
-@app.route("/admin/post/", methods=['GET', 'POST'])
-@login_required # Solo podrán acceder los usuarios logeados
-def post_form():
-    # Cargamos el formulario de forms.py para poder emplearlo
-    form = PostForm()
-    # Validamos si el usuario a presionado el botón de submit del formulario
-    if form.validate_on_submit():
-        # Si lo ha presionado, obtenemos los valores de los campos del fomrulario
-        title = form.title.data
-        title_slug = form.title_slug.data
-        content = form.content.data
-        # Añadimos estos nuevos valores a nuestra lista de diccionarios.
-        posts.append({'title': title,
-                      'title_slug': title_slug,
-                      'content': content})
-        # Redirigimos a la plantilla show_post.html para observar el nuevo post junto con los anteriores.
-        return redirect(url_for('show_post'))
-    
-    # Si no lo presiona (al inicializar) simplemente pasamos al html el formulario de trabajo para poder trabajar con él.
-    return render_template("admin/post_form.html", form=form)
+
 
  
 @app.route('/jugar', methods=['GET', 'POST'])
