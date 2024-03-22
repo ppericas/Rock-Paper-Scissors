@@ -2,12 +2,13 @@
 
 {% block title %}Tutorial Flask: Miniblog{% endblock %}
 
-{% block content %}
-    {% if num_posts == 0 %}
-        <p>No hay posts</p>
-    {% elif num_posts == 1 %}
-        <p>1 post</p>
-    {% else %}
-        <p>{{ num_posts }} posts</p>
-    {% endif %}
+
+{% block juego %}
+        <form action="{{ url_for('jugar') }}" method="post">
+            <label for="input_usuario">Ingresa tu respuesta:</label>
+            <input type="number" id="input_usuario" name="input_usuario">
+            <button type="submit">Enviar</button>
+        </form>
+        <p>{{ mensaje }}</p>
+    
 {% endblock %}

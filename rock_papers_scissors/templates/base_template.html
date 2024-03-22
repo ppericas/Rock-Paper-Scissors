@@ -20,11 +20,11 @@
                 <li>{{ current_user.nick }}</li>
                 <li><a href="{{ url_for('show_post') }}">Posts</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% block juego %}{% endblock %}
             {% endif %}
         </ul>
     </div>
 
-    {% block content %}{% endblock %}
 
 </body>
 </html>
