@@ -1,0 +1,44 @@
+{% extends "base_template.html" %}
+
+{% block title %}Tutorial Flask: Miniblog{% endblock %}
+
+{% block content %}
+    <h1 class = "texto">Resultado:</h1>
+
+    <table class="imagenes resultados">
+        <tr>
+            <td>
+                {% if input_usuario==1 %}
+                    <img class="imagen" src="{{ url_for('static', filename='assets/piedrappt.png') }}">
+                {% elif input_usuario==2 %}
+                    <img class="imagen" src="{{ url_for('static', filename='assets/papelppt.png') }}">
+                {% elif input_usuario==3 %}
+                    <img class="imagen" src="{{ url_for('static', filename='assets/tijerasppt.png') }}">
+                {% endif %}
+            </td>
+            <td>
+                {% if jugadamaquina==1 %}
+                    <img class="imagen" src="{{ url_for('static', filename='assets/piedrappt.png') }}">
+                {% elif jugadamaquina==2 %}
+                    <img class="imagen" src="{{ url_for('static', filename='assets/papelppt.png') }}">
+                {% elif jugadamaquina==3 %}
+                    <img class="imagen" src="{{ url_for('static', filename='assets/tijerasppt.png') }}">
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+            {% if mensaje == 1 %}
+                <h2>empatas</h2>
+            {% elif mensaje == 2 %}
+                <h2>ganas</h2>
+            {% elif mensaje == 3 %}
+                <h2>pierdes</h2>
+            {% endif %}
+        
+        <div class="buttons">
+            <a href="{{ url_for('index') }}"><button>Volver a Jugar</button></a>
+        </div>
+
+{% endblock %}
+
+

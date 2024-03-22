@@ -105,16 +105,19 @@ def show_signup_form():
 @app.route('/jugar', methods=['GET', 'POST'])
 def jugar():
 
-    mensaje = ""
+    
     if request.method == 'POST':
         # Obtener el input del usuario del formulario
         input_usuario = request.form['input_usuario']
+        
         # Llamar a la función juego con el input del usuario
-        resultado_juego = juego(int(input_usuario))
-        mensaje = resultado_juego
+        resultado_juego,jugadamaquina = juego(int(input_usuario))
+        mensaje = int(resultado_juego)
+        input_usuario=int(input_usuario)
+        print(input_usuario, jugadamaquina)
 
     # Renderizar la plantilla HTML con el mensaje
-    return render_template('index.html', mensaje=mensaje)
+    return render_template('resultadoppt.html', mensaje=mensaje, jugadamaquina=jugadamaquina, input_usuario=input_usuario)
 
 
 

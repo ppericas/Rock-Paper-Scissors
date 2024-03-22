@@ -6,20 +6,21 @@ import random
 def juego(valor):
 
     jugada= valor
-    
-    
 
-    jugadamaquina= random.randint(1, 3)
+    valores=[1,2,3]
+
+    jugadamaquina= random.choice(valores)
     print(jugadamaquina)
+    # print(jugada)
 
     if jugada == jugadamaquina:
 
-        return "empate"
+        return 1, jugadamaquina
         
     elif (jugada== 1 and jugadamaquina==3) or (jugada==2 and jugadamaquina==1) or (jugada==3 and jugadamaquina==2):
-        return "ganas"
+        return 2, jugadamaquina
     else:
 
-        return "pierdes"
+        return 3, jugadamaquina
     
     

@@ -5,11 +5,39 @@
 {% block content %}{% endblock %}
 
 {% block juego %}
-        <form action="{{ url_for('jugar') }}" method="post">
-            <label for="input_usuario">Ingresa tu respuesta:</label>
-            <input type="number" id="input_usuario" name="input_usuario">
-            <button type="submit">Enviar</button>
-        </form>
-        <p>{{ mensaje }}</p>
+        <table class="tabla">
+            <tr>
+                <td>
+                    <form action="{{ url_for('jugar') }}" method="post">
+                        <input type="hidden" name="input_usuario" value="1">
+                        <button type="submit" style="border: none; background: none; padding: 0;">
+                            <img src="{{ url_for('static', filename='assets/piedrappt.png') }}" class="imagen">
+                        </button>
+                    </form>
+
+                    </td>
+                    <td>
+                    
+                    <form action="{{ url_for('jugar') }}" method="post">
+                        <input type="hidden" name="input_usuario" value="2">
+                        <button type="submit" style="border: none; background: none; padding: 0;">
+                            <img src="{{ url_for('static', filename='assets/papelppt.png') }}" class="imagen">
+                        </button>
+                    </form>
+
+                    </td>
+                    <td>
+                    
+                    <form action="{{ url_for('jugar') }}" method="post">
+                        <input type="hidden" name="input_usuario" value="3">
+                        <button type="submit" style="border: none; background: none; padding: 0;">
+                            <img src="{{ url_for('static', filename='assets/tijerasppt.png') }}" class="imagen">
+                        </button>
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+
     
 {% endblock %}
